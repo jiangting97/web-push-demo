@@ -34,6 +34,11 @@ async function run() {
     }
   });
 
+  const p = document.getElementById("subscribe-content")
+  p.textContent = JSON.stringify(subscription);
+  // 将新元素添加到div中
+  div.appendChild(p);
+
   console.log('Sent push', JSON.stringify(subscription));
 }
 
