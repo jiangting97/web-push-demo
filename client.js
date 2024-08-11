@@ -17,6 +17,7 @@ async function run() {
   .then(async (registration) => {
     console.log('Service Worker 注册成功:', registration);
         console.log('Service Worker 注册成功2:', registration.pushManager);
+       alert(registration.pushManager)
 
     // registration.pushManager.getSubscription().then((pushSubscription) => {
     //   console.log(pushSubscription)
