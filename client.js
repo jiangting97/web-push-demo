@@ -16,16 +16,11 @@ async function run() {
   navigator.serviceWorker.register('/worker.js', { scope: '/' })
   .then(async (registration) => {
     console.log('Service Worker 注册成功:', registration);
-        console.log('Service Worker 注册成功2:', registration.pushManager);
-       alert(registration.pushManager)
-
-        navigator.serviceWorker.ready.then(() =>  {
+    alert(registration.pushManager)
+    console.log('Service Worker 注册成功2:', registration.pushManager);
+    navigator.serviceWorker.ready.then(() =>  {
       alert("registration.pushManager" + registration.pushManager)
-    }
-
-    // registration.pushManager.getSubscription().then((pushSubscription) => {
-    //   console.log(pushSubscription)
-    // })
+    })
 
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
