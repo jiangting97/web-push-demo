@@ -2,12 +2,25 @@
   <head>
     <title>Push Demo</title>
     <script type="application/javascript" src="/client.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   </head>
 
-  <body>
-    Service Worker Demo
-     <button onclick="subscribe()">
-      subscribe
-    </button>
+  <body >
+    <div style="font-size: 20px; padding: 10px 0;">
+      web push  Demo
+    </div>
+
+    <div >
+      <button onclick="subscribe()" style="padding: 5px; font-size: 16px;">
+        subscribe
+      </button>
+    </div>
+
+    <div>
+      <p id="subscribe-content" style="overflow-x: scroll;">
+      </p>
+    </div>
+
   </body>
 </html>
