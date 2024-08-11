@@ -9,8 +9,9 @@ function subscribe() {
 }
 async function run() {
   console.log('Registering service worker');
-  const registration = await navigator.serviceWorker.
-    register('/worker.js', {scope: '/'});
+  const registration = await navigator.serviceWorker.register('/worker.js');
+
+
   console.log('Registered service worker');
 
   console.log('Registering push');
@@ -37,7 +38,6 @@ async function run() {
   const p = document.getElementById("subscribe-content")
   p.textContent = JSON.stringify(subscription);
   // 将新元素添加到div中
-
   console.log('Sent push', JSON.stringify(subscription));
 }
 
