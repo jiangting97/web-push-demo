@@ -1,11 +1,12 @@
-const publicVapidKey = 'BOynOrGhgkj8Bfk4hsFENAQYbnqqLSigUUkCNaBsAmNuH6U9EWywR1JIdxBVQOPDbIuTaj0tVAQbczNLkC5zftw';
+const publicVapidKey = 'BFHwv4bQUgF3hY1rCcaVmfUxWYjAGc3FT4YJQbvIl8fKft1abcbOyYffqiPt16O7-lu0W6c9m62IlmvwIgU_yFg';
 
-if ('serviceWorker' in navigator) {
-  console.log('Registering service worker');
 
-  run().catch(error => console.error(error));
+function subscribe() {
+  if ('serviceWorker' in navigator) {
+    console.log('Registering service worker');
+    run().catch(error => console.error(error));
+  }
 }
-
 async function run() {
   console.log('Registering service worker');
   const registration = await navigator.serviceWorker.
@@ -13,8 +14,12 @@ async function run() {
   console.log('Registered service worker');
 
   console.log('Registering push');
-  const subscription = await registration.pushManager.
-    subscribe({
+
+  registration.pushManager.getSubscription().then((pushSubscription) => {
+    console.log(pushSubscription)
+  })
+
+  const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
     });
@@ -28,7 +33,8 @@ async function run() {
       'content-type': 'application/json'
     }
   });
-  console.log('Sent push');
+
+  console.log('Sent push', JSON.stringify(subscription));
 }
 
 // Boilerplate borrowed from https://www.npmjs.com/package/web-push#using-vapid-key-for-applicationserverkey
