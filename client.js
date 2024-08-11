@@ -19,6 +19,10 @@ async function run() {
         console.log('Service Worker 注册成功2:', registration.pushManager);
        alert(registration.pushManager)
 
+        navigator.serviceWorker.ready.then(() =>  {
+      alert("registration.pushManager" + registration.pushManager)
+    }
+
     // registration.pushManager.getSubscription().then((pushSubscription) => {
     //   console.log(pushSubscription)
     // })
