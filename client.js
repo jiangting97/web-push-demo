@@ -10,69 +10,36 @@ function subscribe() {
 async function run() {
   console.log('Registering service worker');
 
-  // const registration = await navigator.serviceWorker.register('/worker.js');
-
-
-  navigator.serviceWorker.register('/worker.js', { scope: '/' })
-  .then(async (registration) => {
-    console.log('Service Worker 注册成功:', registration);
-    alert(registration.pushManager)
-    console.log('Service Worker 注册成功2:', registration.pushManager);
-    navigator.serviceWorker.ready.then(() =>  {
-      alert("registration.pushManager" + registration.pushManager)
-    })
-
-    const subscription = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-    });
-
-    const p = document.getElementById("subscribe-content")
-    p.textContent = JSON.stringify(subscription);
-    // 将新元素添加到div中
-    console.log('Sent push', JSON.stringify(subscription));
-
-      console.log('Sending push');
-  // await fetch('/subscribe', {
-  //   method: 'POST',
-  //   body: JSON.stringify(subscription),
-  //   headers: {
-  //     'content-type': 'application/json'
-  //   }
-  // });
-  })
-  .catch(function(error) {
-    console.error('Service Worker 注册失败:', error);
-  });
+  const registration = await navigator.serviceWorker.register('/worker.js');
 
 
   console.log('Registered service worker');
 
   console.log('Registering push');
 
-  // registration.pushManager.getSubscription().then((pushSubscription) => {
-  //   console.log(pushSubscription)
-  // })
+  registration.pushManager.getSubscription().then((pushSubscription) => {
+    console.log(pushSubscription)
+  })
 
-  // const subscription = await registration.pushManager.subscribe({
-  //     userVisibleOnly: true,
-  //     applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
-  //   });
+  const subscription = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
+    });
   console.log('Registered push');
 
-  // console.log('Sending push');
-  // await fetch('/subscribe', {
-  //   method: 'POST',
-  //   body: JSON.stringify(subscription),
-  //   headers: {
-  //     'content-type': 'application/json'
-  //   }
-  // });
+  console.log('Sending push');
+  await fetch('/subscribe', {
+    method: 'POST',
+    body: JSON.stringify(subscription),
+    headers: {
+      'content-type': 'application/json'
+    }
+  });
 
-  // const p = document.getElementById("subscribe-content")
-  // p.textContent = JSON.stringify(subscription);
-  // // 将新元素添加到div中
-  // console.log('Sent push', JSON.stringify(subscription));
+  const p = document.getElementById("subscribe-content")
+  p.textContent = JSON.stringify(subscription);
+  // 将新元素添加到div中
+  console.log('Sent push', JSON.stringify(subscription));
 }
 
 // Boilerplate borrowed from https://www.npmjs.com/package/web-push#using-vapid-key-for-applicationserverkey
