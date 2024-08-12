@@ -1,5 +1,5 @@
 const publicVapidKey = 'BFHwv4bQUgF3hY1rCcaVmfUxWYjAGc3FT4YJQbvIl8fKft1abcbOyYffqiPt16O7-lu0W6c9m62IlmvwIgU_yFg';
-alert('PushManager' in window)
+
 
 function subscribe() {
   if ('serviceWorker' in navigator) {
